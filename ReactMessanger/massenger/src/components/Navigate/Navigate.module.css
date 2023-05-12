@@ -1,0 +1,203 @@
+.navigate {
+    background: rgb(3, 46, 31);
+    width: 70px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+}
+.navigate div {
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.Nav div {
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+.navigate ion-icon {
+    margin: 5px;
+    color: #fff;
+    font-size: xx-large;
+}
+.Nav ion-icon {
+    margin: 5px;
+    color: #fff;
+    font-size: xx-large;
+}
+.navigate samp:hover::after {
+    border-radius: 0 5px 5px 0;
+    position: relative;
+    right: 17px;
+    bottom: 29px;
+    display: block;
+    content: '';
+    opacity: 0.5;
+    background: #fff;
+    width: 4px;
+    height: 20px;
+}
+.Nav samp:hover::after {
+    border-radius: 0 5px 5px 0;
+    position: relative;
+    right: 17px;
+    bottom: 29px;
+    opacity: 0.5;
+    display: block;
+    content: '';
+    background: #fff;
+    width: 4px;
+    height: 20px;
+}
+
+.navigate samp:hover {
+    height: 39px;
+}
+.Nav samp:hover {
+    height: 39px;
+}
+.at {
+    padding-right: 5px;
+}
+.navigate .at:hover::after {
+    border-radius: 0 5px 5px 0;
+    position: relative;
+    right: 15px;
+    bottom: 30px;
+    display: block;
+    opacity: 0.5;
+    content: '';
+    background: #fff;
+    width: 4px;
+    height: 20px;
+}
+.Nav .at:hover::after {
+    border-radius: 0 5px 5px 0;
+    position: relative;
+    right: 15px;
+    bottom: 30px;
+    display: block;
+    content: '';
+    background: #fff;
+    opacity: 0.5;
+    width: 4px;
+    height: 20px;
+}
+/* .navigate samp samp:hover::after {
+    border-radius: 0 5px 5px 0;
+    position: relative;
+    right: 17px;
+    bottom: 29px;
+    display:grid;
+    content: '';
+    background: #fff;
+    width: 4px;
+    height: 20px;
+}
+.navigate samp samp {
+    position: relative;
+} */
+.navigate div span {
+    width: 60%;
+    height: 1.5px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background: rgb(17, 99, 70);
+}
+.Nav div span {
+    width: 60%;
+    height: 1.5px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background: rgb(17, 99, 70);
+}
+.navigate img {
+    object-fit: cover;
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+}
+.logo {
+    font-weight: bold;
+    color: #fff;
+    width: 30px;
+    margin-top: 15px;
+    margin-right: 7px;
+}
+.Nav {
+    background: rgb(3, 46, 31);
+    width: 70px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+}
+.Nav img {
+    object-fit: cover;
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+}
+@media screen and (max-width: 768px) {
+    .Nav {
+        display: none;
+    }
+    /* .navigate {
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 70px;
+    } */
+    .navigate {
+        display: none;
+    }
+    .logo {
+        display: none;
+    }
+    .navigate div {
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        padding: 0;
+        margin: 0;
+    }
+    .navigate img {
+        display: none;
+    }
+    .ion {
+        margin: 0;
+        margin: 0 15px;
+    }
+    .navigate samp:hover::after {
+        border-radius:5px 5px 0 0;
+        position: relative;
+        /* right: 17px; */
+        left: 8px;
+        bottom: -11px;
+        display: block;
+        content: '';
+        background: #fff;
+        width: 20px;
+        height: 4px;
+        opacity: 0.5;
+    }
+    .navigate .at:hover::after {
+        border-radius:5px 5px 0 0;
+        position: relative;
+        left: 8px;
+        bottom: -11px;
+        display: block;
+        opacity: 0.5;
+        content: '';
+        background: #fff;
+        width: 20px;
+        height: 4px;
+    }
+}

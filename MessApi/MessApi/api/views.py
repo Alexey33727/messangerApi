@@ -14,44 +14,44 @@ from . import tokens
 
 # Create your views here.
 
-
+# class setAvaOrName(generics.UpdateAPIView):
+#     def post(self, request:Request):
+#         id = request.data.get('id')
+#         username = request.data.get('username')
+#         photo = request.data.get('photo')
+        
+#         you = models.User.objects.filter(pk=id)
+#         photoOrAva = you.update(photo=photo, username=username)
+#         res = {
+#             "message": "avatar and username have been successfully updated"
+#         }
+#         return Response(data=res, status=status.HTTP_200_OK)
 
 class createChatView(generics.CreateAPIView):
     def post(self, request:Request):
+        
         yourId = request.data.get('yourId')
         fromId = request.data.get('fromId')
-        fromAva = request.data.get('fromAva')
-        yourAva = request.data.get('yourAva')
         lastMessage = request.data.get('lastMessage')
-        fromName = request.data.get('fromName')
-        yourName = request.data.get('yourName')
         chatId = yourId + fromId
         chat = models.userChats.objects.create(
             chatId=chatId, 
-            yourId=yourId, 
-            fromId=fromId, 
-            fromAva=fromAva, 
-            yourAva=yourAva,
+            your=yourId, 
+            fromm=fromId, 
             lastMessage=lastMessage,
-            fromName=fromName,
-            yourName=yourName
             )
         chat.save()
         chatRes = {
             "header":"Message created successfully",
             "yourId":str(yourId),
             "fromId":str(fromId),
-            "fromAva":str(fromAva),
-            "yourAva":str(yourAva),
             "lastMessage":str(lastMessage),
-            "fromName":str(fromName),
             "chatId":str(chatId),
-            "yourName":str(yourName),
         }
         return Response(data=chatRes, status=status.HTTP_201_CREATED)
 
 class userChatView(generics.ListAPIView):
-    permission_classes = [permissions.IsAuthenticated]
+    # permission_classes = [permissions.IsAuthenticated]
 
     def get(self, request, pk):
         userchats1 = models.userChats.objects.filter(yourId=pk)
@@ -63,7 +63,7 @@ class userChatView(generics.ListAPIView):
 
 
 class getMessagesView(APIView):
-    permission_classes = [permissions.IsAuthenticated]
+    # permission_classes = [permissions.IsAuthenticated]
 
     def get(self, request, pk):
         mess = models.Messages.objects.filter(chatId=pk)
@@ -74,8 +74,11 @@ class getMessagesView(APIView):
         senderId = request.data.get('senderId')
         senderAva = request.data.get('senderAva')
         senderName = request.data.get('senderName')
+        file = request.data.get('file')
+        fileName = request.data.get('fileName')
         text = request.data.get('text')
-        message = models.Messages.objects.create(chatId=chatId, senderId=senderId, senderAva=senderAva, senderName=senderName, text=text)
+        img = request.data.get('img')
+        message = models.Messages.objects.create( fileName=fileName, file=file, img=img, chatId=chatId, senderId=senderId, senderAva=senderAva, senderName=senderName, text=text)
         message.save()
         mess = {
             "header":"Message created successfully",
@@ -83,13 +86,16 @@ class getMessagesView(APIView):
             "senderAva":str(senderAva),
             "senderName":str(senderName),
             "text":str(text),
+            "img":str(img),
+            "file": str(file),
+            "fileName": str(fileName),
             "chatId":str(chatId),
         }
         return Response(data=mess, status=status.HTTP_201_CREATED)
 
 
 class getUsers(generics.ListAPIView):
-    permission_classes = [permissions.IsAuthenticated]
+    # permission_classes = [permissions.IsAuthenticated]
     def get(self, request:Request):
         finder = request.data.get('finder')
         found = models.User.objects.filter(username=finder)

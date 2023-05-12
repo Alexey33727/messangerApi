@@ -36,4 +36,7 @@ class Messages(models.Model):
     senderAva = models.ImageField()
     senderName = models.CharField(max_length=200)
     text = models.CharField(max_length=100000)
+    img = models.ImageField(null=True)
+    file = models.FileField(upload_to='files/files', null=True)
+    fileName = models.CharField(max_length=200, null=True)
     dateAndTime = models.DateTimeField(auto_now_add=True)

@@ -1,0 +1,53 @@
+.NavBar {
+    display: flex;
+    align-items: center;
+    background: rgb(3, 46, 31);
+    height: 50px;
+    padding: 10px;
+    justify-content: space-between;
+    color: rgb(170, 247, 221);
+}
+.logo {
+    font-weight: bold;
+}
+.user {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+img {
+    background-color: rgb(170, 247, 221);
+    height: 24px;
+    width: 24px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+button {
+    background-color: rgb(40, 121, 92);
+    color: rgb(170, 247, 221);
+    border: none;
+    font-size: 13px;
+    cursor: pointer;
+}
+.sett {
+    margin-top: 4px;
+    color: #fff;
+    font-size: 23px;
+}
+@media screen and (max-width: 480px) {
+    .logo {
+        display: none;
+    }
+}
+@media screen and (max-width: 768px) {
+    .logo {
+        display: none;
+    }
+    button {
+        position: absolute;
+        bottom: 10px;
+    }
+}
+@media screen and (max-width: 1200px) {
+    
+}
