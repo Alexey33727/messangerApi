@@ -1,0 +1,22 @@
+
+
+
+
+.app {
+    background: rgb(23, 134, 97);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    width: 100vw;
+}
+@media screen and (max-width: 769px) {
+    .app {
+        background: rgb(23, 134, 97);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        width: 100vw;
+    }
+}

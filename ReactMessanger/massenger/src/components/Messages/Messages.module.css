@@ -1,0 +1,27 @@
+.masseges {
+    background: rgb(243, 243, 243);
+    padding: 10px;
+    padding-bottom: 0;
+    height: calc(100% - 150px);
+    overflow-y: scroll;
+    width: 66vw;
+}
+/* .masseges::-webkit-scrollbar {
+    width: 0px;
+} */
+.notOpen {
+    text-align: center;
+    margin-top: 200px;
+    font-size: xx-large;
+    font-weight: bolder;
+    color: rgb(144, 146, 146);
+}
+
+@media screen and (max-width: 768px) {
+    .masseges {
+        background: rgb(243, 243, 243);
+        padding: 10px;
+        height: calc(100% - 215px);
+        width: 100vw;
+    }
+}

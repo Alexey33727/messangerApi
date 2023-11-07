@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'django_filters',
     'drf_yasg',
+    'corsheaders',
 
 
     'api.apps.ApiConfig',
@@ -57,6 +58,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
 ]
 
 ROOT_URLCONF = 'MessApi.urls'
@@ -260,3 +263,7 @@ SIMPLE_JWT = {
 #! auth
 
 AUTH_USER_MODEL = "api.User" 
+
+
+
+CORS_ORIGINS_ALLOWED_ALL = True

@@ -1,0 +1,70 @@
+.form {
+    display: flex;
+    flex-direction: column;
+}
+.form input {
+    margin: 10px;
+    border: none;
+    outline: none;
+    border-bottom: 1px solid #a3a3a3;
+    background: transparent;
+    color: #000;
+}
+.form input.file{
+    border: none;
+    display: none;
+}
+.form input::placeholder {
+    color: rgb(175, 175, 175);
+}
+.form label ion-icon {
+    margin-left: 20px ;
+    color: rgb(0, 145, 94);
+    font-size: xx-large;
+}
+.form label span {
+    margin-left: 10px;
+    margin-bottom: 2px;
+}
+.form label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+.title, .logo {
+    text-align: center;
+    color: rgb(0, 145, 94);
+}
+.logo {
+    font-size: xx-large;
+    margin-bottom: 5px;
+}
+.title {
+    margin-top: 0;
+    font-weight: 600;
+}
+.formCont {
+    background: #fff;
+    padding: 20px;
+    border-radius: 20px;
+}
+.btn {
+    width:100%;
+    margin: 0 auto;
+    margin-top: 10px;
+    border: none;
+    background: rgb(0, 145, 94);
+    padding: 5px;
+    border-radius: 5px;
+    color: #fff;
+}
+.link {
+    font-size: x-small;
+    text-align: center;
+}
+@media screen and (max-width: 769px) {
+    .btn {
+        position: relative;
+        bottom: 0;
+    }
+}

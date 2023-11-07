@@ -10,5 +10,6 @@ urlpatterns = [
     path('signup/', SignUpView.as_view()),
     path('login', LoginView.as_view()),
     path("createchat", createChatView.as_view() ),
+    path("update/avaorusername", setAvaOrName.as_view() ),
     path('finduser', getUsers.as_view())
 ]

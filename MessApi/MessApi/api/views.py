@@ -8,50 +8,51 @@ from rest_framework import permissions
 import numpy as np
 
 
+
 from . import models
 from . import srerializers
 from . import tokens
 
 # Create your views here.
 
+class setAvaOrName(generics.UpdateAPIView):
+    def post(self, request:Request):
+        id = request.data.get('id')
+        username = request.data.get('username')
+        photo = request.FILES.get('photo')
+        
+        you = models.User.objects.get(pk=id)
+        if username != None:
+            you.username = username
+        if photo != None:
+            you.photo = photo
+        you.save()
 
+        res = {
+            "message": "avatar and username have been successfully updated"
+        }
+        return Response(data=res, status=status.HTTP_200_OK)
 
-class createChatView(generics.CreateAPIView):
+class createChatView(APIView):
     def post(self, request:Request):
         yourId = request.data.get('yourId')
         fromId = request.data.get('fromId')
-        fromAva = request.data.get('fromAva')
-        yourAva = request.data.get('yourAva')
         lastMessage = request.data.get('lastMessage')
-        fromName = request.data.get('fromName')
-        yourName = request.data.get('yourName')
         chatId = yourId + fromId
         chat = models.userChats.objects.create(
             chatId=chatId, 
             yourId=yourId, 
             fromId=fromId, 
-            fromAva=fromAva, 
-            yourAva=yourAva,
             lastMessage=lastMessage,
-            fromName=fromName,
-            yourName=yourName
+            you_id=yourId,
+            he_id=fromId
             )
         chat.save()
-        chatRes = {
-            "header":"Message created successfully",
-            "yourId":str(yourId),
-            "fromId":str(fromId),
-            "fromAva":str(fromAva),
-            "yourAva":str(yourAva),
-            "lastMessage":str(lastMessage),
-            "fromName":str(fromName),
-            "chatId":str(chatId),
-            "yourName":str(yourName),
-        }
-        return Response(data=chatRes, status=status.HTTP_201_CREATED)
+        chatRes = srerializers.userChatsSerializers(chat,  many=False)
+        return Response(data=chatRes.data, status=status.HTTP_201_CREATED)
 
 class userChatView(generics.ListAPIView):
-    permission_classes = [permissions.IsAuthenticated]
+    # permission_classes = [permissions.IsAuthenticated]
 
     def get(self, request, pk):
         userchats1 = models.userChats.objects.filter(yourId=pk)
@@ -61,40 +62,42 @@ class userChatView(generics.ListAPIView):
         return Response(data=srerializer.data, status=status.HTTP_200_OK)
 
 
-
 class getMessagesView(APIView):
-    permission_classes = [permissions.IsAuthenticated]
+    # permission_classes = [permissions.IsAuthenticated]
 
     def get(self, request, pk):
         mess = models.Messages.objects.filter(chatId=pk)
-        srerializer = srerializers.MessagesSerializers(mess,  many=True)
+        srerializer = srerializers.MessagesSerializers(mess, many=True)
         return Response(data=srerializer.data, status=status.HTTP_200_OK)
     def post(self, request:Request, pk):
         chatId = pk
-        senderId = request.data.get('senderId')
-        senderAva = request.data.get('senderAva')
-        senderName = request.data.get('senderName')
+        sender = request.data.get('sender') 
+        file = request.data.get('file')
+        fileName = request.data.get('fileName')
         text = request.data.get('text')
-        message = models.Messages.objects.create(chatId=chatId, senderId=senderId, senderAva=senderAva, senderName=senderName, text=text)
+        img = request.data.get('img')
+        message = models.Messages.objects.create( fileName=fileName, file=file, img=img, chatId=chatId, sender_id=sender, text=text)
         message.save()
         mess = {
             "header":"Message created successfully",
-            "senderId":str(senderId),
-            "senderAva":str(senderAva),
-            "senderName":str(senderName),
-            "text":str(text),
+            "sender":str(sender),
+            "img":str(img),
+            "file": str(file),
+            "fileName": str(fileName),
             "chatId":str(chatId),
         }
         return Response(data=mess, status=status.HTTP_201_CREATED)
 
 
-class getUsers(generics.ListAPIView):
-    permission_classes = [permissions.IsAuthenticated]
-    def get(self, request:Request):
+class getUsers(APIView):
+    # permission_classes = [permissions.IsAuthenticated]
+    def post(self, request:Request):
         finder = request.data.get('finder')
         found = models.User.objects.filter(username=finder)
         srerializer = srerializers.UserSerializers(found, many=True)
         return Response(srerializer.data, status=status.HTTP_200_OK)
+        
+    
 
 
 class SignUpView(generics.GenericAPIView):
@@ -143,6 +146,7 @@ class LoginView(APIView):
             content = {
                 "user_email": str(request.user.email),
                 "user_photo": f"media/{request.user.photo}",
+                "user_id": str(request.user.id),
                 "user_name": str(request.user.username),
                 "user_is_super":request.user.is_superuser,
                 "auth": str(request.auth),

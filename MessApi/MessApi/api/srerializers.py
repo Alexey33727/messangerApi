@@ -6,10 +6,17 @@ from rest_framework.authtoken.models import Token
 
 from .models import *
 
-
+class SenderSerializers(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ('id', 'username', 'photo')
 
 class userChatsSerializers(serializers.ModelSerializer):
     """Список чатов"""
+
+    you = SenderSerializers( many=False, read_only=True )
+    he = SenderSerializers( many=False, read_only=True )
+
     class Meta:
         model = userChats
         fields = '__all__'
@@ -17,8 +24,18 @@ class userChatsSerializers(serializers.ModelSerializer):
 
 
 
+#! User Serializer
+class UserSerializers(serializers.ModelSerializer):
+    """Список users"""
+    class Meta:
+        model = User
+        fields = '__all__'
+
 class MessagesSerializers(serializers.ModelSerializer):
-    """Список чатов"""
+    """Список сообщений"""
+
+    sender = SenderSerializers( many=False, read_only=True )
+
     class Meta:
         model = Messages
         fields = '__all__'
@@ -40,12 +57,7 @@ class MessagesSerializers(serializers.ModelSerializer):
 #         fields = ['chatId', 'senderId', 'senderAva', 'senderName', 'text']
 
 
-#! User Serializer
-class UserSerializers(serializers.ModelSerializer):
-    """Список users"""
-    class Meta:
-        model = User
-        fields = '__all__'
+
 
 
 
